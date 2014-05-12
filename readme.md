@@ -28,7 +28,7 @@ gulp.task('screens', function () {
 
 ```
 
-## Options
+## opts
 
 same as [no-media-queries](https://github.com/danielhusar/no-media-queries#options)
 
