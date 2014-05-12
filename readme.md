@@ -1,4 +1,4 @@
-# [gulp](http://gulpjs.com)-local-screenshots [![Build Status](https://secure.travis-ci.org/danielhusar/gulp-no-media-queries.svg?branch=master)](http://travis-ci.org/danielhusar/gulp-no-media-queries)
+# [gulp](http://gulpjs.com)-no-media-queries [![Build Status](https://secure.travis-ci.org/danielhusar/gulp-no-media-queries.svg?branch=master)](http://travis-ci.org/danielhusar/gulp-no-media-queries)
 
 Export the css without mediaqueries matching maximum page width.
 
