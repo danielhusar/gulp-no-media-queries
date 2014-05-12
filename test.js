@@ -5,7 +5,6 @@ var nmq = require('./index.js');
 
 it('It should generate properly screenshot', function (cb) {
   var stream = nmq();
-  var files = [];
 
   stream.on('data', function(file){
     assert.equal(file.contents.toString(), 'a {\n  color: red;\n}');
