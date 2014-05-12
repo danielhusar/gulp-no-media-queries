@@ -14,7 +14,7 @@ it('It should export the proper css rules', function (cb) {
   stream.write(new gutil.File({
     base: __dirname,
     path: __dirname + '/style.css',
-    contents: new Buffer('a{color:red} @media all and (min-width: 500px){a{color:red;}}')
+    contents: new Buffer('a{color:blue} @media all and (min-width: 500px){a{color:red;}}')
   }));
 
   stream.end();
