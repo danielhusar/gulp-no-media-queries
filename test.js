@@ -3,7 +3,7 @@ var assert = require('assert');
 var gutil = require('gulp-util');
 var nmq = require('./index.js');
 
-it('It should generate properly screenshot', function (cb) {
+it('It should export the proper css rules', function (cb) {
   var stream = nmq();
 
   stream.on('data', function(file){
