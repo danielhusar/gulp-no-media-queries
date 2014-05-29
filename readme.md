@@ -16,7 +16,7 @@ npm install --save-dev gulp-no-media-queries
 var gulp = require('gulp');
 var nmq = require('gulp-no-media-queries');
 
-gulp.task('screens', function () {
+gulp.task('css', function () {
   gulp.src('./public/*.css')
   .pipe(nmq(opts, rewokOts))
   .pipe(rename({
