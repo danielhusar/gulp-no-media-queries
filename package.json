@@ -1,6 +1,6 @@
 {
   "name": "gulp-no-media-queries",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Export mediaqueries that match provided max page width",
   "license": "MIT",
   "repository": "danielhusar/gulp-no-media-queries",
@@ -27,7 +27,7 @@
   "dependencies": {
     "gulp-util": "~2.2.14",
     "through2": "~0.4.1",
-    "no-media-queries": "^0.0.2"
+    "no-media-queries": "^0.0.4"
   },
   "devDependencies": {
     "mocha": "^1.18.2"
