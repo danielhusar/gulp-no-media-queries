@@ -19,7 +19,7 @@ module.exports = function (opts, rewokOts) {
     }
 
     try {
-      file.contents = new Buffer(nmq(file.contents.toString(), opts, rewokOts));
+      file.contents = nmq(file.contents, opts, rewokOts);
     } catch (err) {
       this.emit('error', new gutil.PluginError('gulp-no-media-queries', err));
     }
