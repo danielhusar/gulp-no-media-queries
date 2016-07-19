@@ -1,30 +1,50 @@
+/* global require Buffer module */
 'use strict';
-var gutil = require('gulp-util');
-var through = require('through2');
-var nmq = require('no-media-queries');
 
-module.exports = function (opts, rewokOts) {
-  opts = opts ? opts : {};
-  rewokOts = rewokOts ? rewokOts : {};
+var rework = require('rework');
+var noMedia = require('rework-no-media');
+var extend = require('object-extend');
+var nmq;
 
-  return through.obj(function (file, enc, cb) {
-    if (file.isNull()) {
-      this.push(file);
-      return cb();
+nmq = function(css, opts, rewokOts) {
+  function inRange(queryPixels, queryType) {
+    var max = Number(opts['max-width'].match(/\d*/)[0]);
+    var min = Number(opts['min-width'].match(/\d*/)[0]);
+    var width = Number(opts.width.match(/\d*/)[0]);
+
+    return (width === queryPixels)
+    || ((max >= queryPixels) && (queryPixels >= min));
+  }
+
+  var widthRegex = /(?:[^-]|min-|max-)width:\s*(\d*).*$/;
+  var defaults = {
+    type: 'all',
+    width: 'X',
+    'max-width': '1000000px',
+    'min-width': '0px',
+  };
+  var isBuffer = Buffer.isBuffer(css);
+
+  if (isBuffer) {
+    css = css.toString('utf-8');
+  }
+
+  opts = extend(defaults, opts);
+  css = rework(css);
+
+  //reduce stylesheet from rules not within media queries or not matching breakpoint
+  css.obj.stylesheet.rules = css.obj.stylesheet.rules.filter(function(item) {
+    if (item.type !== 'media') {
+      return item;
+    } else if (item.media && item.media.match(widthRegex) && inRange(Number(item.media.match(widthRegex)[1]))) {
+      return item;
     }
 
-    if (file.isStream()) {
-      this.emit('error', new gutil.PluginError('gulp-no-media-queries', 'Streaming not supported'));
-      return cb();
-    }
-
-    try {
-      file.contents = nmq(file.contents, opts, rewokOts);
-    } catch (err) {
-      this.emit('error', new gutil.PluginError('gulp-no-media-queries', err));
-    }
-
-    this.push(file);
-    cb();
+    return false;
   });
+
+  var result = css.use(noMedia()).toString(rewokOts);
+  return isBuffer ? new Buffer(result) : result;
 };
+
+module.exports = nmq;
