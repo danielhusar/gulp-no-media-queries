@@ -1,8 +1,15 @@
-# [gulp](http://gulpjs.com)-no-media-queries [![Build Status](https://secure.travis-ci.org/danielhusar/gulp-no-media-queries.svg?branch=master)](http://travis-ci.org/danielhusar/gulp-no-media-queries)
+# [gulp](http://gulpjs.com)-no-media-queries [![Build Status](https://github.com/aemonge/gulp-no-media-queries)]
+
+
+Forked to give ranged support.
 
 Export the css without mediaqueries matching maximum page width.
 
-See [no-media-queries](https://github.com/danielhusar/no-media-queries) for documentation.
+See [no-media-queries](https://github.com/danielhusar/no-media-queries) for documentation. And added the following:
+
+* *min-width* option. Will include all media-queries greater or equal than provided `min-width`.
+* *max-width* option. Will include all media-queries lesser or equal than provided `max-width`.
+
 
 ## Install
 
@@ -28,6 +35,23 @@ gulp.task('css', function () {
 
 ```
 
+### Min width example
+
+```
+gulp.task('css', function () {
+  gulp.src('./public/*.css')
+  .pipe(nmq({
+    'min-width': '300px'
+  }))
+  .pipe(rename({
+    suffix: '.ie',
+    extname: '.css'
+  }))
+  .pipe(gulp.dest('./public/'));
+});
+```
+
+
 ## opts
 
 same as [no-media-queries](https://github.com/danielhusar/no-media-queries#options)
@@ -36,6 +60,5 @@ same as [no-media-queries](https://github.com/danielhusar/no-media-queries#optio
 
 same as [no-media-queries](https://github.com/danielhusar/no-media-queries#reworkoptions)
 
-## License
-
+## License (Forked)
 MIT © [Daniel Husar](https://github.com/danielhusar)
